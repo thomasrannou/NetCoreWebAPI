@@ -1,17 +1,19 @@
+# Mettre à jour AKS
+
 Ce répertoire contient les sources nécessaires à la réalisation de ce tutoriel :
 Mettre à jour son cluster Kubernetes dans Azure - http://thomasrannou.azurewebsites.net/2020/04/14/mettre-a-jour-son-cluster-kubernetes-dans-azure-aks/
 
 Pour être au niveau coté sécurité et fonctionnalité, il est important de rester à jour sur sa version de Kubernetes. 
 Nous allons voir ici comment mettre à jour notre cluster AKS sans pour autant entraîner d’interruption de service.
 
-# Initialisation
+## Initialisation
 Tout d’abord, je vais utiliser le script Powershell pour provisionner une container registry et un cluster AKS pour héberger mon application.
 J’utilise Visual Studio Code avec l’extension Powershell pour développer et tester mon script.
 Dans ce script, vous pouvez paramétrer la localisation, le nom du ressource group, de la registry et du cluster. 
 Il permet de déployer un cluster comprenant 3 nodes réparti chacun dans une zone de disponibilité de la région North Europe.
 Une fois exécuté, le script vous fourni les informations sur votre cluster déployé.
 
-# Déploiement
+## Déploiement
 Je construit une image Docker pour mon projet. J’ai choisi comme projet de test une Web API .Net Core 3.1.
 docker build -f "NetCoreWebApi/Dockerfile" . -t webapi
 
@@ -54,7 +56,7 @@ Idem, mon application est comme précédemment imperturbable 🙂
 
 az aks show --resource-group rgAks--name aks --output table 
 
-# Les explications !
+## Les explications !
 Comme vu précédemment, notre API est restée accessible tout du long de la mise à jour du cluster. Pourquoi ?
 En fait ce n’est pas le node lui même qui est mis à jour. Il est plutôt remplacé par un node cible.
 Pendant la mise à jour, AKS ajoute un nouveau nœud au cluster utilisant la version de Kubernetes indiquée. 
