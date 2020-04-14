@@ -35,7 +35,7 @@ kubectl describe pod | select-string -pattern '^Name:','^Node:'
 kubectl get service :
 C’est OK, mon API est bien disponible à l’url indiquée par la commande jouée précédemment (External IP) 🙂
 
-Mise à jour du cluster
+## Mise à jour du cluster
 Je liste les mises à jour disponibles pour mon cluster, volontairement déployés lors de la phase d’initialisation en version 1.13.2 :
 az aks get-upgrades --resource-group rgAks --name aksClusterMaj
 
